@@ -1,1 +1,6 @@
 @import "tailwindcss";
+@import "assets/font-family/Satoshi_Complete/Fonts/WEB/css/satoshi.css";
+
+body{
+    font-family:Satoshi-Medium;
+}
