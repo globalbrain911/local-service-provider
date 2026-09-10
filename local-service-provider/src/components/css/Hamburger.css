@@ -13,13 +13,13 @@
 }
 
 .bar {
-  width: 1rem;
+  width: 0.8rem;
   height: 0.15rem;
   background-color: white;
   border-radius: 10px;
   transition: all 0.1s linear;
   position: relative;
-  transform-origin: 2.4px;
+  transform-origin: 0.8px;
 }
 
 /* CSS Morphing Animations (Transforms 3 lines into an 'X') */
