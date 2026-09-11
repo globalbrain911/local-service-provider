@@ -9,11 +9,11 @@ function ServicesBar() {
   };
   return (
     <>
-      <form action="">
+      <form action="" className="my-3">
         <div class="px-6">
           <div class="relative flex justify-center ">
             <input
-              id="location"
+              id="service"
               value={inputValue}
               onChange={(e) => setInputVlaue(e.target.value)}
               onBlur={handleBlur}
@@ -26,7 +26,7 @@ function ServicesBar() {
             "
             />
             <label
-              for="location"
+              for="service"
               class="absolute cursor-text text-gray-500 font-normal bg-transparent px-3 left-3 top-4 text-lg transition-all 
           transform origin-left peer-focus:top-0
           peer-focus:left-3 peer-focus:text-s peer-focus:text-gray-500 peer-focus:scale-80 peer-focus:"
@@ -40,7 +40,7 @@ function ServicesBar() {
             </div>
           </div>
           <input
-            className="bg-black text-white mt-3 px-7 rounded-lg h-12"
+            className="bg-black text-white mt-4 px-7 rounded-lg h-12"
             type="submit"
             value="See services"
           />
