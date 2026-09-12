@@ -3,7 +3,6 @@ import '../css/Hamburger.css';
 
 export default function Hamburger() {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };

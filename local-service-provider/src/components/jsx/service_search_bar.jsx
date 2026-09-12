@@ -4,9 +4,7 @@ import magnifying_glass from "../../assets/images/magnifying_glass.png";
 
 function ServicesBar() {
   const [inputValue, setInputVlaue] = useState("");
-  const handleBlur = () => {
-    setInputVlaue("");
-  };
+  const [hasBeenSelected, setHasBeenSelected] = useState(false);
   return (
     <>
       <div className="flex justify-center">
@@ -23,7 +21,7 @@ function ServicesBar() {
                   id="service"
                   value={inputValue}
                   onChange={(e) => setInputVlaue(e.target.value)}
-                  onBlur={handleBlur}
+                  onFocus={() => setHasBeenSelected(true)}
                   class="
             text-lg
             w-full peer bg-gray-100 placeholder:text-slate-400 text-slate-700
@@ -34,9 +32,9 @@ function ServicesBar() {
                 />
                 <label
                   for="service"
-                  class="absolute cursor-text text-gray-500 font-normal bg-transparent px-3 left-3 top-4 text-lg transition-all 
-          transform origin-left peer-focus:top-0
-          peer-focus:left-3 peer-focus:text-s peer-focus:text-gray-500 peer-focus:scale-80 peer-focus:"
+                  class={`absolute cursor-text text-gray-500 bg-transparent transition-all transform origin-left px-3 
+                ${hasBeenSelected ? "top-0 left-3 text-s text-gray-500 scale-80 " : " font-normal left-3 top-4 text-lg "}
+                  `}
                 >
                   Service
                 </label>

@@ -10,7 +10,7 @@ function Header() {
           <div className="text-sm flex items-center pr-2">
             <div className="text-white mr-4">Log in</div>
             <div className="bg-white p-2 px-3 rounded-4xl ml-1">Sign up</div>
-            <Hamburger/>
+            <Hamburger />
           </div>
         </div>
       </header>
