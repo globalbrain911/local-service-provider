@@ -23,24 +23,64 @@ function ExploreServices() {
 
   return (
     <>
-      <div className=" my-4">
-        <div className="flex justify-center w-full w-max-150 px-6 text-3xl font-[Satoshi-Bold] tracking-tigh">
-          Explore what you can do with LSF
-        </div>
-        <div className="flex justify-center">
-          <div className="text-[10px] grid grid-cols-3 sm:grid-cols-3 sm:text-2xl md:grid-cols-4 max-w-250">
-            {services.map((service) => (
-              <div className="aspect-square  bg-gray-100 text-center m-2 p-2 rounded-2xl">
-                <div className="flex justify-center">
-                  <img
-                    src={service.service_logo}
-                    alt=""
-                    className="w-20 h-20 object-contain"
-                  />
-                </div>
-                <div className="text-center">{service.service_name}</div>
+      <div className="my-4 flex justify-center">
+        <div className="max-w-350 w-full ">
+          <div className=" lg:px-30">
+            <div className="lg:my-10 mx-5 lg:text-5xl font-[Satoshi-Bold] tracking-tigh">
+              Explore what you can do with LSF
+            </div>
+            <div className="">
+              <div className="text-[10px] flex flex-wrap justify-start">
+                {services.map((service) => (
+                  <div className="aspect-square  bg-gray-100 text-center m-2 p-2 rounded-2xl">
+                    <div className="flex justify-center">
+                      <img
+                        src={service.service_logo}
+                        alt=""
+                        className="w-20 h-20 object-contain"
+                      />
+                    </div>
+                    <div className="text-center text-[10px]">{service.service_name}</div>
+                  </div>
+                ))}
+                {services.map((service) => (
+                  <div className="aspect-square  bg-gray-100 text-center m-2 p-2 rounded-2xl">
+                    <div className="flex justify-center">
+                      <img
+                        src={service.service_logo}
+                        alt=""
+                        className="w-20 h-20 object-contain"
+                      />
+                    </div>
+                    <div className="text-center">{service.service_name}</div>
+                  </div>
+                ))}
+                {services.map((service) => (
+                  <div className="aspect-square  bg-gray-100 text-center m-2 p-2 rounded-2xl">
+                    <div className="flex justify-center">
+                      <img
+                        src={service.service_logo}
+                        alt=""
+                        className="w-20 h-20 object-contain"
+                      />
+                    </div>
+                    <div className="text-center">{service.service_name}</div>
+                  </div>
+                ))}
+                {services.map((service) => (
+                  <div className="aspect-square  bg-gray-100 text-center m-2 p-2 rounded-2xl">
+                    <div className="flex justify-center">
+                      <img
+                        src={service.service_logo}
+                        alt=""
+                        className="w-20 h-20 object-contain"
+                      />
+                    </div>
+                    <div className="text-center">{service.service_name}</div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </div>
