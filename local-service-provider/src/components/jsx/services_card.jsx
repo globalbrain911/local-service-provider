@@ -20,7 +20,7 @@ function ServiceCard() {
   return (
     <>
       <div className="flex justify-center ">
-        <div className="w-360 m-3 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
+        <div className="w-320 m-3 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
           {services.map((service) => (
             <div className="my-2 px-5 py-4 rounded-4xl bg-gray-100 ">
               <div className="">

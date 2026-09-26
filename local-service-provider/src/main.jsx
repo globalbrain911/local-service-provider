@@ -5,12 +5,16 @@ import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Services from "./Services.jsx";
 import NotFoundPage from "./NotFound.jsx";
-import Footer from "./footer.jsx";
+import Login from "./login.jsx";
+import Signin from "./signin.jsx";
+import SellerPage from "./SellerPage.jsx";
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
   { path: "/Services", element: <Services /> },
-  { path: "/Footer", element: <Footer /> },
+  { path: "/Login", element: <Login /> },
+  { path: "/Signin", element: <Signin /> },
+  { path: "/SellerPage", element: <SellerPage /> },
   { path: "*", element: <NotFoundPage /> },
 ]);
 

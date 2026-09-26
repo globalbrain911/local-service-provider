@@ -9,7 +9,7 @@ function ContactUsForm() {
             </h2>
           </div>
           <div className="flex justify-center">
-            <div className=" max-w-150 px-6 py-6 bg-gray-100 rounded-4xl">
+            <div className=" max-w-320 px-6 py-6 bg-gray-100 rounded-2xl">
               <section class="">
                 <div class="grid md:grid-cols-2 items-start gap-16 mx-auto max-w-5xl">
                   <div>

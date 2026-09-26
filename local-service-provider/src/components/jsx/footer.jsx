@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import insta from "./assets/images/logo/insta.png";
-import fb from "./assets/images/logo/fb.png";
-import x from "./assets/images/logo/x.png";
-import linkedin from "./assets/images/logo/linkedin.png";
-import language from "./assets/images/logo/language.png";
-import location from "./assets/images/logo/location.png";
+import insta from "../../assets/images/logo/insta.png";
+import fb from "../../assets/images/logo/fb.png";
+import x from "../../assets/images/logo/x.png";
+import linkedin from "../../assets/images/logo/linkedin.png";
+import language from "../../assets/images/logo/language.png";
+import location from "../../assets/images/logo/location.png";
 
 function Footer() {
   const socialMediaLogos = [insta, linkedin, x, fb];
@@ -75,7 +75,11 @@ function Footer() {
                 </div>
                 <div className="flex items-center mx-3">
                   <div className="w-5 h-5">
-                    <img src={location} className="bg-white rounded-4xl" alt="" />
+                    <img
+                      src={location}
+                      className="bg-white rounded-4xl"
+                      alt=""
+                    />
                   </div>
                   <div className="ml-3">Colombo</div>
                 </div>

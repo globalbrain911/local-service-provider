@@ -19,8 +19,12 @@ function Header() {
               </div>
             </div>
             <div className="text-sm flex bgamber-400 items-center">
-              <div className="text-white mr-4">Log in</div>
-              <div className="bg-white p-2 px-3 rounded-4xl ml-1">Sign up</div>
+              <div className="text-white mr-4">
+                <Link to="/login">Log in</Link>
+              </div>
+              <div className="bg-white p-2 px-3 rounded-4xl ml-1">
+                <Link to="/Signin"> Sign in</Link>
+              </div>
               <div className={`${"lg:hidden"}`}>
                 <Hamburger />
               </div>
