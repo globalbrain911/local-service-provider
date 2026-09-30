@@ -8,7 +8,7 @@ import AboutUs from "./components/jsx/About_us.jsx";
 function App() {
   return (
     <>
-      <div className="pt-[6rem]">
+      <div className="pt-24">
         <Header />
         <ServicesBar />
         <ExploreServices />

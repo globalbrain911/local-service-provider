@@ -16,7 +16,9 @@ function ExploreServices() {
     }
     setServices(data);
   }
+
   const [services, setServices] = useState([]);
+  
   useEffect(() => {
     getServices();
   }, []);
@@ -24,7 +26,7 @@ function ExploreServices() {
   return (
     <>
       <div className="my-4 flex justify-center">
-        <div className="max-w-320 w-full">
+        <div className="max-w-7xl w-full">
           <div className="px-6 lg:px-16">
             <div
               className="lg:my-10  my-5

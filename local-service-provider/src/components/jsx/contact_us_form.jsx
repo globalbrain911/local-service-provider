@@ -2,31 +2,30 @@ function ContactUsForm() {
   return (
     <>
       <form action="">
-        <div className="px-6 py-6">
+        <div className="py-6">
+          <h2 class="ml-6 text-3xl text-slate-900 tracking-tight mb-6 md:text-4xl">
+            Contact Us
+          </h2>
+          <div className="flex justify-center"></div>
           <div className="flex justify-center">
-            <h2 class="text-3xl font-bold text-slate-900 mb-6 md:text-4xl ">
-              Contact Us
-            </h2>
-          </div>
-          <div className="flex justify-center">
-            <div className=" max-w-320 px-6 py-6 bg-gray-100 rounded-2xl">
+            <div className=" max-w-7xl px-6 py-6 bg-[#F7F7F7]">
               <section class="">
                 <div class="grid md:grid-cols-2 items-start gap-16 mx-auto max-w-5xl">
                   <div>
                     <div class="mb-12">
-                      <p class="text-base leading-relaxed text-black">
+                      <p class="text-base leading-relaxed text-black tracking-tight">
                         Have some big idea or brand to develop and need help?
                         Then reach out we'd love to hear about your project and
                         provide help.
                       </p>
                     </div>
                     <div class="mt-12">
-                      <h3 class="text-slate-900 text-base font-semibold">
+                      <h3 class="text-slate-900 font-semibold text-4xl">
                         Email
                       </h3>
                       <ul class="mt-4">
                         <li class="flex items-center">
-                          <div class="flex items-center bg-slate-200 w-8 h-8 p-2 rounded-full">
+                          <div class="flex items-center bg-white w-8 h-8 p-2 rounded-full">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               class="fill-current  "
@@ -62,83 +61,17 @@ function ContactUsForm() {
                           </div>
                           <a href="#" class="text-sm ml-4">
                             <small class="block text-slate-900 ">Mail</small>
-                            <span class="font-semibold">info@lsf.com</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-
-                    <div class="mt-8">
-                      <h3 class="text-slate-900 text-base font-semibold ">
-                        Socials
-                      </h3>
-                      <ul class="flex flex-wrap gap-4 mt-4">
-                        <li>
-                          <a
-                            href="#"
-                            class="flex items-center bg-slate-200  w-8 h-8 p-2 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-black"
-                            aria-label="Facebook"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              class="size-full fill-slate-600 dark:fill-slate-50"
-                              viewBox="0 0 155.139 155.139"
-                              aria-hidden="true"
-                            >
-                              <path
-                                d="M89.584 155.139V84.378h23.742l3.562-27.585H89.584V39.184c0-7.984 2.208-13.425 13.67-13.425l14.595-.006V1.08C115.325.752 106.661 0 96.577 0 75.52 0 61.104 12.853 61.104 36.452v20.341H37.29v27.585h23.814v70.761z"
-                                data-original="#010002"
-                              />
-                            </svg>
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#"
-                            class="flex items-center bg-slate-200  w-8 h-8 p-2 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-black"
-                            aria-label="LinkedIn"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              class="size-full fill-slate-600 dark:fill-slate-50"
-                              viewBox="0 0 24 24"
-                              aria-hidden="true"
-                            >
-                              <path
-                                d="M23.994 24v-.001H24v-8.802c0-4.306-.927-7.623-5.961-7.623-2.42 0-4.044 1.328-4.707 2.587h-.07V7.976H8.489v16.023h4.97v-7.934c0-2.089.396-4.109 2.983-4.109 2.549 0 2.587 2.384 2.587 4.243V24zM.396 7.977h4.976V24H.396zM2.882 0C1.291 0 0 1.291 0 2.882s1.291 2.909 2.882 2.909 2.882-1.318 2.882-2.909A2.884 2.884 0 0 0 2.882 0"
-                                data-original="#000000"
-                              />
-                            </svg>
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#"
-                            class="flex items-center bg-slate-200  w-8 h-8 p-2 rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-black"
-                            aria-label="X"
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              class="size-full fill-slate-600 dark:fill-slate-50"
-                              viewBox="0 0 1226.37 1226.37"
-                              aria-hidden="true"
-                            >
-                              <path
-                                d="M727.348 519.284 1174.075 0h-105.86L680.322 450.887 370.513 0H13.185l468.492 681.821L13.185 1226.37h105.866l409.625-476.152 327.181 476.152h357.328L727.322 519.284zM582.35 687.828l-47.468-67.894-377.686-540.24H319.8l304.797 435.991 47.468 67.894 396.2 566.721H905.661L582.35 687.854z"
-                                data-original="#000000"
-                              />
-                            </svg>
+                            <span class="font-semibold">info@lsf.lk</span>
                           </a>
                         </li>
                       </ul>
                     </div>
                   </div>
-
                   <form class="space-y-4">
                     <div>
                       <label
                         for="name"
-                        class="mb-2 text-slate-900  font-medium text-sm inline-block"
+                        class="mb-2 text-slate-900 text-2xl font-medium inline-block"
                       >
                         Name
                       </label>

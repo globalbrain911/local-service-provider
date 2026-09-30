@@ -6,15 +6,17 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Services from "./Services.jsx";
 import NotFoundPage from "./NotFound.jsx";
 import Login from "./login.jsx";
-import Signin from "./signin.jsx";
+import Signup from "./signup.jsx";
+import Dashboard from "./Dashboard.jsx";
 import SellerPage from "./SellerPage.jsx";
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
   { path: "/Services", element: <Services /> },
   { path: "/Login", element: <Login /> },
-  { path: "/Signin", element: <Signin /> },
+  { path: "/Signup", element: <Signup /> },
   { path: "/SellerPage", element: <SellerPage /> },
+  { path: "/Dashboard", element: <Dashboard /> },
   { path: "*", element: <NotFoundPage /> },
 ]);
 

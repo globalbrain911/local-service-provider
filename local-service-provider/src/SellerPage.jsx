@@ -16,7 +16,7 @@ function SellerPage() {
   return (
     <>
       <div className="flex justify-center mt-20">
-        <div className="max-w-320">
+        <div className="max-w-7xl">
           <div>
             <Header />
           </div>
