@@ -192,9 +192,7 @@ function Home({ user }) {
               />
             </div>
           </div>
-          <div></div>
-
-          <div className="pr-3 pt-3">
+          <div className="pr-3 pt-5">
             <div
               onClick={handleUpdate}
               className="text-lg cursor-pointer rounded-lg bg-black text-white w-full p-3 flex justify-center items-center"
@@ -205,15 +203,12 @@ function Home({ user }) {
               <p>{message}</p>
             </div>
           </div>
-          <div className="pr-3 grid grid-cols-2">
+          <div className="pr-3">
             <div
               onClick={handleLogout}
               className="text-lg cursor-pointer rounded-lg bg-red-600 border-2 selection:border-black text-white w-full p-3 flex justify-center items-center"
             >
               Sign out
-            </div>
-            <div className="text-lg cursor-pointer rounded-lg bg-indigo-800 border-2 selection:border-black text-white w-full p-3 flex justify-center items-center">
-              Become a Seller
             </div>
           </div>
         </div>

@@ -4,10 +4,11 @@ import HeaderLow from "./Dashboard/headerLow";
 import Home from "./Dashboard/Home";
 import Security from "./Dashboard/secuirty";
 import PrivacyAndData from "./Dashboard/privacy_n_data";
+import SellerForm from "./Dashboard/sellerDashboard/sellerForm";
 
 function Dashboard() {
   const [user, setUser] = useState(null);
-  const items = ["Home", "Security", "Privacy & Data"];
+  const items = ["Home", "Security", "Privacy & Data", "Become a Seller"];
   const [state, setState] = useState(0);
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -25,20 +26,20 @@ function Dashboard() {
     <>
       <div className="mt-18">
         <HeaderLow />
-        <div className="flex">
-          <div className="min-w-60 flex flex-col text-lg">
-            <div className="h-12">
+        <div className="sm:flex">
+          <div className="sm:min-w-45 flex flex-col text-lg ">
+            <div className="h-20 sm:h-50 flex sm:flex-col  overflow-x-auto">
               {items.map((item, index) => (
                 <div
-                  className={`${state === index ? "bg-zinc-200 cursor-pointer flex h-full" : " cursor-pointer flex h-full"}`}
+                  className={`${state === index ? "bg-zinc-200 cursor-pointer flex h-full p-5 sm:p-0" : " cursor-pointer flex h-full sm:p-0 p-5"}`}
                   onClick={() => {
                     setState(index);
                   }}
                 >
                   <div
-                    className={`${state === index ? "bg-black w-1 absolute h-12" : ""}`}
+                    className={`${state === index ? "sm:bg-black sm:w-1 sm:absolute sm:h-12" : ""}`}
                   ></div>
-                  <div className="ml-5 flex justify-center items-center">
+                  <div className="sm:ml-5 flex justify-center items-center">
                     {item}
                   </div>
                 </div>
@@ -55,7 +56,9 @@ function Dashboard() {
             <div className={`${state === 2 ? "w-full" : "hidden"}`}>
               <PrivacyAndData user={user} />
             </div>
-            <div className={`${state === 2 ? "w-full" : "hidden"}`}></div>
+            <div className={`${state === 3 ? "w-full" : "hidden"}`}>
+              <SellerForm user={user} />
+            </div>
           </div>
         </div>
       </div>
