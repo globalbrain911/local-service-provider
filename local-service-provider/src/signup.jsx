@@ -19,6 +19,15 @@ function Signup() {
       setMessage("Check your email to confirm your account!");
     }
   };
+  const handleSignUpWithOAuth = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: "https://localhost:5173/dashboard",
+      },
+    });
+    if (error) console.error("Login error:", error.message);
+  };
 
   return (
     <>
@@ -59,7 +68,10 @@ function Signup() {
               <span className="mx-2">or</span> <hr className="grow" />
             </div>
             <div className="p-3 w-full text-center bg-taupe-200 rounded-lg">
-              <div className="flex justify-center">
+              <div
+                className="flex justify-center"
+                onClick={handleSignUpWithOAuth}
+              >
                 <div className="w-5">
                   <img className="object-contain" src={Google} alt="" />
                 </div>

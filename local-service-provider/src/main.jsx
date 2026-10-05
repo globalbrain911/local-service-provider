@@ -9,6 +9,8 @@ import Login from "./login.jsx";
 import Signup from "./signup.jsx";
 import Dashboard from "./Dashboard.jsx";
 import SellerPage from "./SellerPage.jsx";
+import MoreDetail from "./components/jsx/More_detail.jsx";
+import SellerForm from "./Dashboard/sellerDashboard/sellerForm.jsx";
 
 const router = createBrowserRouter([
   { path: "/", element: <App /> },
@@ -17,6 +19,8 @@ const router = createBrowserRouter([
   { path: "/Signup", element: <Signup /> },
   { path: "/SellerPage", element: <SellerPage /> },
   { path: "/Dashboard", element: <Dashboard /> },
+  { path: "/MoreDetail", element: <MoreDetail /> },
+  { path: "/SellerForm", element: <SellerForm /> },
   { path: "*", element: <NotFoundPage /> },
 ]);
 

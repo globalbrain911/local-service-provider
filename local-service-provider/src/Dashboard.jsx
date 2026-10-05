@@ -53,7 +53,7 @@ function Dashboard() {
               <Security />
             </div>
             <div className={`${state === 2 ? "w-full" : "hidden"}`}>
-              <PrivacyAndData />
+              <PrivacyAndData user={user} />
             </div>
             <div className={`${state === 2 ? "w-full" : "hidden"}`}></div>
           </div>

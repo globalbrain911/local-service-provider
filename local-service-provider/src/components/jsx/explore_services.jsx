@@ -1,15 +1,9 @@
-// import carpenter from "../../assets/images/Services/pngfind.com-bob-the-builder-png-3166017.png";
-// import plumber from "../../assets/images/Services/plumber.png";
-// import studio from "../../assets/images/Services/studio.png";
-// import electrician from "../../assets/images/Services/electrician.png";
-// import gardening from "../../assets/images/Services/gardening.png";
-// import supermarket from "../../assets/images/Services/supermarket.png";
 import { supabase } from "./../../assets/supabase-client";
 import { useEffect, useState } from "react";
 
 function ExploreServices() {
   async function getServices() {
-    const { data, error } = await supabase.from("services").select();
+    const { data, error } = await supabase.from("services_main_page").select();
     if (error) {
       console.log(error);
       return;
@@ -18,7 +12,7 @@ function ExploreServices() {
   }
 
   const [services, setServices] = useState([]);
-  
+
   useEffect(() => {
     getServices();
   }, []);

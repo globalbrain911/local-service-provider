@@ -2,6 +2,7 @@ import { useState } from "react";
 import magnifying_glass from "../../assets/images/magnifying_glass.png";
 import Location from "./location";
 import mainimage from "../../assets/images/main_page_image.jpg";
+import { Link } from "react-router-dom";
 //import search from "../../assets/images/search.png";
 
 function ServicesBar() {
@@ -54,12 +55,13 @@ function ServicesBar() {
                         </div>
                       </div>
                     </div>
-
-                    <input
-                      className="bg-black text-white mt-4 px-7 rounded-lg h-12"
-                      type="submit"
-                      value="See services"
-                    />
+                    <div>
+                      <input
+                        className="bg-black text-white mt-4 px-7 rounded-lg h-12"
+                        type="submit"
+                        value="See services"
+                      />
+                    </div>
                   </div>
                 </div>
               </form>
