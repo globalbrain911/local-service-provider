@@ -6,13 +6,22 @@ import LocationPicker from "../locationPicker";
 
 function SellerForm({ user }) {
   const [allServices, setAllServices] = useState([]);
-  const [service, setService] = useState(true);
-  const [selected, setSelected] = useState([]);
   const [longitude, setLongitude] = useState(null);
   const [latitude, setLatitude] = useState(null);
   const [geoMessage, setGeoMessage] = useState("");
+  const [profileImageUrl, setProfileImageUrl] = useState(
+    user.user_metadata.avatar_url,
+  );
+  const [nic, setNIC] = useState("");
+  const [selectedServices, setSelectedServices] = useState([]);
+  const [providerType, setProviderType] = useState("service");
+  const [businessName, setBusinessName] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [whatsappNumber, setWhatsappNumber] = useState("");
+  const [message, setMessage] = useState("");
   const [locatingUser, setLocatingUser] = useState(false);
   const [locationLabel, setLocationLabel] = useState("");
+
   const useMyLocation = () => {
     if (!navigator.geolocation) {
       setGeoMessage("Location not supported on this browser");
@@ -54,16 +63,84 @@ function SellerForm({ user }) {
       });
   }, []);
 
+  useEffect(() => {
+    const load = async () => {
+      const { data, error } = await supabase
+        .from("provider_services")
+        .select("service_id, services(id, name)")
+        .eq("provider_id", user.id);
+
+      console.log("saved services:", data, error);
+      if (data) {
+        const preSelected = data.map((row) => ({
+          value: row.services.id,
+          label: row.services.name,
+        }));
+        setSelectedServices(preSelected);
+      }
+    };
+    load();
+  }, [user.id]);
+
+  useEffect(() => {
+    const load = async () => {
+      const { data } = await supabase
+        .from("service_providers")
+        .select("*")
+        .eq("user_id", user.id)
+        .maybeSingle();
+      if (data) {
+        setNIC(data.nic ?? "");
+        setProviderType(data.provider_type ?? "");
+        setBusinessName(data.business_name ?? "");
+        setMobile(data.mobile_number ?? "");
+        setProfileImageUrl(
+          data.profile_image_url ?? user.user_metadata.avatar_url,
+        );
+        setWhatsappNumber(data.whatsapp_number ?? "");
+        setLatitude(data.latitude ?? null);
+        setLongitude(data.longitude ?? null);
+        setLocationLabel(data.location_label ?? "");
+      }
+      console.log(data);
+    };
+    load();
+  }, [user.id]);
+
   const handleSubmit = async () => {
-    const rows = selected.map((s) => ({
-      provider_id: user.id,
-      service_id: s.value,
-      title: s.label,
-    }));
-    const { error } = await supabase.from("provider_packages").insert(rows);
-    if (error) {
-      console.log(error);
+    const { error: providerError } = await supabase
+      .from("service_providers")
+      .upsert({
+        user_id: user.id,
+        nic: nic,
+        whatsapp_number: whatsappNumber,
+        mobile_number: mobile,
+        profile_image_url: profileImageUrl,
+        latitude: latitude,
+        longitude: longitude,
+        location_label: locationLabel,
+        provider_type: providerType,
+        business_name: businessName,
+      });
+    if (providerError) {
+      setMessage(providerError.message);
+      return console.log(message);
     }
+    await supabase
+      .from("provider_services")
+      .delete()
+      .eq("provider_id", user.id);
+    const rows = selectedServices.map((s) => ({
+      provider_id: user.id,
+      service_id: s.value, // from react-select's {value, label} shape
+    }));
+    const { error: servicesError } = await supabase
+      .from("provider_services")
+      .insert(rows);
+
+    setMessage(
+      servicesError ? servicesError.message : "Application submitted!",
+    );
   };
 
   return (
@@ -82,20 +159,20 @@ function SellerForm({ user }) {
             "
             >
               <div
-                className={`${service ? "px-6 py-3 rounded-4xl flex justify-center bg-black text-white" : "px-6 py-3 rounded-4xl flex justify-center"}`}
-                onClick={() => setService(true)}
+                className={`${providerType === "service" ? "px-6 py-3 rounded-4xl flex justify-center bg-black text-white" : "px-6 py-3 rounded-4xl flex justify-center"}`}
+                onClick={() => setProviderType("service")}
               >
                 <label htmlFor="Service">Service</label>
               </div>
               <div
-                className={`${service ? "px-6 py-3 rounded-4xl flex justify-center" : "px-6 py-3 rounded-4xl flex justify-center bg-black text-white"}`}
-                onClick={() => setService(false)}
+                className={`${providerType === "shop" ? "px-6 py-3 rounded-4xl flex justify-center bg-black text-white" : "px-6 py-3 rounded-4xl flex justify-center"}`}
+                onClick={() => setProviderType("shop")}
               >
                 <label htmlFor="Shop">Shop</label>
               </div>
             </div>
           </div>
-          {service ? (
+          {providerType === "service" ? (
             ""
           ) : (
             <>
@@ -106,6 +183,8 @@ function SellerForm({ user }) {
                     className="border-none bg-slate-200 p-3 px-4 w-full rounded-lg selection:border-black selection:border-2"
                     type="text"
                     placeholder="Ex:Keells"
+                    value={businessName}
+                    onChange={(e) => setBusinessName(e.target.value)}
                   />
                 </div>
               </div>
@@ -114,37 +193,22 @@ function SellerForm({ user }) {
               </div>
             </>
           )}
-          <div className="grid grid-cols-2">
-            <div className="pr-1 py-3">
-              <input
-                className="border-none bg-slate-200 p-3 px-4 w-full rounded-lg selection:border-black selection:border-2"
-                type="text"
-                placeholder="First Name"
-              />
-            </div>
-            <div className="py-3">
-              <input
-                className="border-none bg-slate-200 p-3 px-4 w-full rounded-lg selection:border-black selection:border-2"
-                type="text"
-                placeholder="Last Name"
-              />
-            </div>
-          </div>
-          <div className="pb-3">
+          <div className="my-3">
             <input
               className="border-none bg-slate-200 p-3 px-4 w-full rounded-lg selection:border-black selection:border-2"
               type="text"
               placeholder="NIC"
+              value={nic}
+              onChange={(e) => setNIC(e.target.value)}
             />
           </div>
           <div>
             <Select
-              className=""
               isMulti
               options={allServices}
-              value={selected}
-              onChange={setSelected}
-              placeholder="Type to search services..."
+              value={selectedServices}
+              onChange={setSelectedServices}
+              placeholder="Select the services you offer..."
             />
           </div>
           <div>
@@ -152,21 +216,18 @@ function SellerForm({ user }) {
               <input
                 className="border-none bg-slate-200 p-3 px-4 w-full rounded-lg selection:border-black selection:border-2"
                 type="number"
-                placeholder="Telephone number"
+                placeholder="Mobile number"
+                value={mobile}
+                onChange={(e) => setMobile(e.target.value)}
               />
               <input
                 className="border-none bg-slate-200 p-3 px-4 w-full rounded-lg selection:border-black selection:border-2"
                 type="number"
                 placeholder="Whatsapp number"
+                value={whatsappNumber}
+                onChange={(e) => setWhatsappNumber(e.target.value)}
               />
             </div>
-          </div>
-          <div className="">
-            <input
-              className="border-none bg-slate-200 p-3 px-4 w-full rounded-lg selection:border-black selection:border-2"
-              type="email"
-              placeholder="Email"
-            />
           </div>
           <div className="">
             <div className="mt-3">
@@ -215,12 +276,12 @@ function SellerForm({ user }) {
           </div>
           <div className="pt-3">
             <div
-              onClick={handleSubmit}
+              onClick={() => handleSubmit()}
               className="text-lg cursor-pointer rounded-lg bg-black text-white w-full p-3 flex justify-center items-center"
             >
               Update
             </div>
-            <div className="my-4 text-center text-green-700"></div>
+            <div className="my-4 text-center text-green-700">{message}</div>
           </div>
           <div className="mb-15">
             Note:-
