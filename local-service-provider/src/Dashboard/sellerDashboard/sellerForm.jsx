@@ -5,7 +5,6 @@ import { supabase } from "../../assets/supabase-client";
 import LocationPicker from "../locationPicker";
 import clsx from "clsx";
 
-
 function SellerForm({ user, providerStatus }) {
   const [allServices, setAllServices] = useState([]);
   const [longitude, setLongitude] = useState(null);
