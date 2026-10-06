@@ -4,21 +4,47 @@ import HeaderLow from "./Dashboard/headerLow";
 import Home from "./Dashboard/Home";
 import Security from "./Dashboard/secuirty";
 import PrivacyAndData from "./Dashboard/privacy_n_data";
+import clsx from "clsx";
 import SellerForm from "./Dashboard/sellerDashboard/sellerForm";
 
 function Dashboard() {
   const [user, setUser] = useState(null);
-  const items = ["Home", "Security", "Privacy & Data", "Become a Seller"];
   const [state, setState] = useState(0);
+  const [providerStatus, setProviderStatus] = useState("loading");
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       if (!session) {
         window.location.href = "/Login";
       } else {
         setUser(session.user);
+        const load = async () => {
+          const { data } = await supabase
+            .from("service_providers")
+            .select("provider_status")
+            .eq("user_id", session.user.id)
+            .maybeSingle();
+          if (!data) {
+            setProviderStatus("none");
+          } else {
+            setProviderStatus(data.provider_status);
+          }
+        };
+        load();
       }
     });
   }, []);
+
+  const sellerItemLabel = () => {
+    switch (providerStatus) {
+      case "none":
+        return "Become a Seller";
+      default:
+        return "Seller Dashboard";
+    }
+  };
+
+  const items = ["Home", "Security", "Privacy & Data", sellerItemLabel()];
 
   if (!user) return console.log("Loading...");
 
@@ -31,13 +57,19 @@ function Dashboard() {
             <div className="h-20 sm:h-50 flex sm:flex-col  overflow-x-auto">
               {items.map((item, index) => (
                 <div
-                  className={`${state === index ? "bg-zinc-200 cursor-pointer flex h-full p-5 sm:p-0" : " cursor-pointer flex h-full sm:p-0 p-5"}`}
                   onClick={() => {
                     setState(index);
                   }}
+                  className={clsx("cursor-pointer flex h-full sm:p-0 p-5", {
+                    "bg-purple-700 text-white": index === 3,
+                    "bg-zinc-200": state === index && index !== 3,
+                    "bg-purple-900": state === index && index === 3,
+                  })}
                 >
                   <div
-                    className={`${state === index ? "sm:bg-black sm:w-1 sm:absolute sm:h-12" : ""}`}
+                    className={clsx({
+                      "sm:bg-black sm:w-1 sm:absolute sm:h-12": state === index,
+                    })}
                   ></div>
                   <div className="sm:ml-5 flex justify-center items-center">
                     {item}
@@ -57,7 +89,7 @@ function Dashboard() {
               <PrivacyAndData user={user} />
             </div>
             <div className={`${state === 3 ? "w-full" : "hidden"}`}>
-              <SellerForm user={user} />
+              <SellerForm user={user} providerStatus={providerStatus} />
             </div>
           </div>
         </div>

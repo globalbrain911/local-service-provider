@@ -3,8 +3,10 @@ import HeaderLow from "../headerLow";
 import Select from "react-select";
 import { supabase } from "../../assets/supabase-client";
 import LocationPicker from "../locationPicker";
+import clsx from "clsx";
 
-function SellerForm({ user }) {
+
+function SellerForm({ user, providerStatus }) {
   const [allServices, setAllServices] = useState([]);
   const [longitude, setLongitude] = useState(null);
   const [latitude, setLatitude] = useState(null);
@@ -151,7 +153,7 @@ function SellerForm({ user }) {
           Hello,{user.user_metadata.full_name}
         </div>
         <div className="pr-5 mt-5">
-          <div className="flex justify-center">
+          <div className="flex justify-between gap-1 my-5">
             <div
               className="grid grid-cols-2 
              border-2
@@ -169,6 +171,19 @@ function SellerForm({ user }) {
                 onClick={() => setProviderType("shop")}
               >
                 <label htmlFor="Shop">Shop</label>
+              </div>
+            </div>
+            <div className=" flex justify-center items-center ">
+              <div
+                className={clsx(
+                  "px-2 py-2 border rounded-4xl shadow-md text-sm cursor-progress",
+                  {
+                    "text-red-800": providerStatus === "rejected",
+                    "text-green-500": providerStatus === "pending",
+                  },
+                )}
+              >
+                {providerStatus}
               </div>
             </div>
           </div>
@@ -212,21 +227,29 @@ function SellerForm({ user }) {
             />
           </div>
           <div>
-            <div className="py-3 flex flex-col sm:flex-row gap-2">
-              <input
-                className="border-none bg-slate-200 p-3 px-4 w-full rounded-lg selection:border-black selection:border-2"
-                type="number"
-                placeholder="Mobile number"
-                value={mobile}
-                onChange={(e) => setMobile(e.target.value)}
-              />
-              <input
-                className="border-none bg-slate-200 p-3 px-4 w-full rounded-lg selection:border-black selection:border-2"
-                type="number"
-                placeholder="Whatsapp number"
-                value={whatsappNumber}
-                onChange={(e) => setWhatsappNumber(e.target.value)}
-              />
+            <div className="py-3 flex flex-col sm:flex-row gap-2 my-2">
+              <div className=" w-full">
+                <label htmlFor="mobile_number">Mobile number</label>
+                <input
+                  id="mobile_number"
+                  className="border-none bg-slate-200 w-full p-3 px-4 rounded-lg selection:border-black selection:border-2"
+                  type="number"
+                  placeholder="Mobile number"
+                  value={mobile}
+                  onChange={(e) => setMobile(e.target.value)}
+                />
+              </div>
+              <div className="w-full">
+                <label htmlFor="whatsapp_number">Whatsapp number</label>
+                <input
+                  id="whatsapp_number"
+                  className="border-none bg-slate-200 p-3 px-4 w-full rounded-lg selection:border-black selection:border-2"
+                  type="number"
+                  placeholder="Whatsapp number"
+                  value={whatsappNumber}
+                  onChange={(e) => setWhatsappNumber(e.target.value)}
+                />
+              </div>
             </div>
           </div>
           <div className="">
