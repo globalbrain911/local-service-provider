@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "assets/font-family/Satoshi_Complete/Fonts/WEB/css/satoshi.css";
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
 
 @custom-variant dark (&:is(.dark *));

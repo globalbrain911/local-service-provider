@@ -11,10 +11,10 @@ function ServicesBar() {
   return (
     <>
       <div className="flex justify-center ">
-        <div className="max-w-320 w-full grid lg:grid-cols-2">
+        <div className="max-w-7xl w-full grid lg:grid-cols-2">
           <div className="my-3 lg:pl-10 bg-ambe-500 flex justify-start items-center">
             <div className="">
-              <div className="bg-amber-40 flex justify-start items-center ml-5">
+              <div className="bg-amber-40 flex justify-between items-center px-5">
                 <Location />
               </div>
               <form action="">
