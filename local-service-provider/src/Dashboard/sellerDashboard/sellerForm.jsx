@@ -5,6 +5,7 @@ import { supabase } from "../../assets/supabase-client";
 import LocationPicker from "../locationPicker";
 import clsx from "clsx";
 import { PulsatingButton } from "@/components/ui/pulsating-button";
+import { StatusBadge } from "@/components/animations/StatusBadge";
 
 function SellerForm({ user, providerStatus }) {
   const [allServices, setAllServices] = useState([]);
@@ -149,8 +150,9 @@ function SellerForm({ user, providerStatus }) {
     <>
       <HeaderLow />
       <div className="max-w-200 pl-5 pt-10 mt-5">
-        <div className="text-3xl font-bold">
+        <div className="text-3xl font-bold flex flex-col sm:flex-row justify-between pr-5">
           Hello,{user.user_metadata.full_name}
+          <StatusBadge status={providerStatus} />
         </div>
         <div className="pr-5 mt-5">
           <div className="flex justify-between gap-1 my-5">
@@ -173,20 +175,6 @@ function SellerForm({ user, providerStatus }) {
                 <label htmlFor="Shop">Shop</label>
               </div>
             </div>
-            {providerStatus !== "none" ? (
-              <div className=" flex justify-center items-center pl-3">
-                <div className="pr-1">{providerStatus}</div>
-                <PulsatingButton
-                  className={clsx("-top-4 text-sm p-0  w-2 h-2 rounded-full", {
-                    "bg-yellow-400": providerStatus === "pending",
-                    "bg-red-400": providerStatus === "rejected",
-                    "bg-green-400": providerStatus === "approved",
-                  })}
-                ></PulsatingButton>
-              </div>
-            ) : (
-              ""
-            )}
           </div>
           {providerType === "service" ? (
             ""
