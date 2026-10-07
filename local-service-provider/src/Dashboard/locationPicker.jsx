@@ -27,9 +27,13 @@ function LocationPicker({ onSelect }) {
 
   return (
     <Select
+      classNames={{
+        control: () => ` rounded-lg px-2 min-w-40 min-h-[44px] bg-background`,
+        indicatorSeparator: () => "hidden",
+      }}
       options={options}
       onChange={handleChange}
-      placeholder="Search your area..."
+      placeholder="Choose city"
       isClearable
     />
   );

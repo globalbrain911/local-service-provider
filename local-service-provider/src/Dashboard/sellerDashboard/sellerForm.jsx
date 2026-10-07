@@ -4,6 +4,7 @@ import Select from "react-select";
 import { supabase } from "../../assets/supabase-client";
 import LocationPicker from "../locationPicker";
 import clsx from "clsx";
+import { PulsatingButton } from "@/components/ui/pulsating-button";
 
 function SellerForm({ user, providerStatus }) {
   const [allServices, setAllServices] = useState([]);
@@ -172,19 +173,20 @@ function SellerForm({ user, providerStatus }) {
                 <label htmlFor="Shop">Shop</label>
               </div>
             </div>
-            <div className=" flex justify-center items-center ">
-              <div
-                className={clsx(
-                  "px-2 py-2 border rounded-4xl shadow-md text-sm cursor-progress",
-                  {
-                    "text-red-800": providerStatus === "rejected",
-                    "text-green-500": providerStatus === "pending",
-                  },
-                )}
-              >
-                {providerStatus}
+            {providerStatus !== "none" ? (
+              <div className=" flex justify-center items-center pl-3">
+                <div className="pr-1">{providerStatus}</div>
+                <PulsatingButton
+                  className={clsx("-top-4 text-sm p-0  w-2 h-2 rounded-full", {
+                    "bg-yellow-400": providerStatus === "pending",
+                    "bg-red-400": providerStatus === "rejected",
+                    "bg-green-400": providerStatus === "approved",
+                  })}
+                ></PulsatingButton>
               </div>
-            </div>
+            ) : (
+              ""
+            )}
           </div>
           {providerType === "service" ? (
             ""

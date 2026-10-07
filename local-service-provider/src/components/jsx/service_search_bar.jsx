@@ -33,8 +33,7 @@ function ServicesBar() {
                           onChange={(e) => setInputVlaue(e.target.value)}
                           onFocus={() => setHasBeenSelected(true)}
                           class="
-            text-lg
-            w-full peer bg-gray-100 placeholder:text-slate-400 text-slate-700
+            text-lg w-full peer bg-gray-100 shadow-md placeholder:text-slate-400 text-slate-700
             rounded-md px-5 pt-6.5 pb-3.5 max-h-15 
             transition duration-300 ease
             selection:border-2 selection:border-black

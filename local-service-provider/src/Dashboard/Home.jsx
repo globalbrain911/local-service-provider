@@ -11,9 +11,9 @@ function Home({ user }) {
   const [avatarUrl, setAvatarUrl] = useState(user.user_metadata.avatar_url);
   const [longitude, setLongitude] = useState(null);
   const [latitude, setLatitude] = useState(null);
+  const [locationLabel, setLocationLabel] = useState("");
   const [geoMessage, setGeoMessage] = useState("");
   const [locatingUser, setLocatingUser] = useState(false);
-  const [locationLabel, setLocationLabel] = useState("");
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
