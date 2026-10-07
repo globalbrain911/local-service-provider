@@ -239,7 +239,9 @@ function ContactUsForm() {
                     <p>{error}</p>
                     <div className="flex">
                       <div className=" rounded-4xl " onClick={handleSubmit}>
-                        <InteractiveHoverButton>
+                        <InteractiveHoverButton
+                          hoverTextClassName={"text-white"}
+                        >
                           Submit your thoughts
                         </InteractiveHoverButton>
                       </div>

@@ -2,7 +2,6 @@ import { useState } from "react";
 import magnifying_glass from "../../assets/images/magnifying_glass.png";
 import Location from "./location";
 import mainimage from "../../assets/images/main_page_image.jpg";
-import { Link } from "react-router-dom";
 //import search from "../../assets/images/search.png";
 
 function ServicesBar() {

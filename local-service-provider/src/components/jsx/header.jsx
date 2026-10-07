@@ -2,6 +2,7 @@ import Hamburger from "./hamburger";
 import { useEffect, useState } from "react";
 import { supabase } from "../../assets/supabase-client";
 import { Link } from "react-router-dom";
+import { InteractiveHoverButton } from "../ui/interactive-hover-button";
 
 function Header() {
   const [user, setUser] = useState(null);
@@ -41,8 +42,19 @@ function Header() {
             <div className="text-sm flex bgamber-400 items-center">
               {user ? (
                 <>
-                  <div className="bg-white p-2 px-3 rounded-4xl ml-1">
-                    <Link to="/Dashboard"> Go to Dashboard</Link>
+                  <div className="rounded-4xl">
+                    <Link to="/Dashboard">
+                      {" "}
+                      <InteractiveHoverButton
+                        className={
+                          "border border-white text-white hover:text-black"
+                        }
+                        dotClassName={"bg-white"}
+                        hoverTextClassName={"text-black"}
+                      >
+                        Go to Dashboard
+                      </InteractiveHoverButton>
+                    </Link>
                   </div>
                 </>
               ) : (
