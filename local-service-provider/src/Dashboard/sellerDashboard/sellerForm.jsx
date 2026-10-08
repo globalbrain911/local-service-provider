@@ -5,6 +5,9 @@ import { supabase } from "../../assets/supabase-client";
 import LocationPicker from "../locationPicker";
 import clsx from "clsx";
 import { StatusBadge } from "@/components/animations/StatusBadge";
+import InputField from "@/components/jsx/inputField";
+import { RippleButton } from "@/components/ui/ripple-button";
+import PopUpMessage from "@/components/jsx/PopUpMessage";
 
 function SellerForm({ user, providerStatus }) {
   const [allServices, setAllServices] = useState([]);
@@ -23,6 +26,7 @@ function SellerForm({ user, providerStatus }) {
   const [message, setMessage] = useState("");
   const [locatingUser, setLocatingUser] = useState(false);
   const [locationLabel, setLocationLabel] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
 
   const useMyLocation = () => {
     if (!navigator.geolocation) {
@@ -188,17 +192,15 @@ function SellerForm({ user, providerStatus }) {
             ""
           ) : (
             <>
-              <div className="">
-                <div className="text-lg">Shop Name</div>
-                <div className="py-2">
-                  <input
-                    className="border-none bg-white p-3 px-4 w-full rounded-lg selection:border-black selection:border-2"
-                    type="text"
-                    placeholder="Ex:Keells"
-                    value={businessName}
-                    onChange={(e) => setBusinessName(e.target.value)}
-                  />
-                </div>
+              <div className="py-2">
+                <InputField
+                  label="Shop Name"
+                  id="shopName"
+                  type="text"
+                  value={businessName}
+                  input={businessName}
+                  onChange={(e) => setBusinessName(e.target.value)}
+                />
               </div>
               <div className="text-sm text-gray-600">
                 Note:- All the below data should belongs to shop owner
@@ -206,11 +208,12 @@ function SellerForm({ user, providerStatus }) {
             </>
           )}
           <div className="my-3">
-            <input
-              className="border-none bg-slate-200 p-3 px-4 w-full rounded-lg selection:border-black selection:border-2"
+            <InputField
               type="text"
-              placeholder="NIC"
+              label="NIC"
+              id="nic"
               value={nic}
+              input={nic}
               onChange={(e) => setNIC(e.target.value)}
             />
           </div>
@@ -226,58 +229,51 @@ function SellerForm({ user, providerStatus }) {
           <div>
             <div className="py-3 flex flex-col sm:flex-row gap-2 my-2">
               <div className=" w-full">
-                <label htmlFor="mobile_number">Mobile number</label>
-                <input
-                  id="mobile_number"
-                  className="border-none bg-slate-200 w-full p-3 px-4 rounded-lg selection:border-black selection:border-2"
+                <InputField
                   type="number"
-                  placeholder="Mobile number"
+                  label="Mobile Number"
+                  id="mobileNumber"
                   value={mobile}
+                  input={mobile}
                   onChange={(e) => setMobile(e.target.value)}
                 />
               </div>
               <div className="w-full">
-                <label htmlFor="whatsapp_number">Whatsapp number</label>
-                <input
-                  id="whatsapp_number"
-                  className="border-none bg-slate-200 p-3 px-4 w-full rounded-lg selection:border-black selection:border-2"
+                <InputField
                   type="number"
-                  placeholder="Whatsapp number"
+                  label="Whatsapp Number"
+                  id="whatsappNumber"
                   value={whatsappNumber}
+                  input={whatsappNumber}
                   onChange={(e) => setWhatsappNumber(e.target.value)}
                 />
               </div>
             </div>
           </div>
           <div className="">
-            <div className="mt-3">
-              <div className="border-none bg-slate-200 p-3 px-4 w-full rounded-lg selection:border-black selection:border-2">
-                {locationLabel
-                  ? "You are from " + locationLabel
-                  : "Select where you live..."}
-              </div>
+            <div className="">
+              <InputField
+                label="Location"
+                id="locationLabel"
+                value={locationLabel}
+                input={locationLabel}
+                onChange={(e) => setMobile(e.target.value)}
+                disabled
+              />
             </div>
-          </div>
-          <div className="cursor-progress">
-            {locatingUser ? (
-              <>
-                <p className="bg-white text-green-700 text-center">
-                  Locating...
-                </p>
-              </>
-            ) : (
-              ""
-            )}
-          </div>
-          <div className="my-1 grid grid-cols-2 gap-2 w-full text-sm">
-            <div
-              onClick={useMyLocation}
-              className="text-center p-2  sm:p-0 cursor-pointer rounded-2xl hover:bg-slate-300 bg-slate-200 
-              w-full flex justify-center items-center"
-            >
-              Use my current location
+            <div className="cursor-progress">
+              {locatingUser ? (
+                <>
+                  <p className="bg-white text-green-700 text-center">
+                    Locating...
+                  </p>
+                </>
+              ) : (
+                ""
+              )}
             </div>
-            <div className="cursor-pointer">
+            <div className="grid grid-cols-2 my-3 gap-2 items-stretch w-full h-15 ">
+              <RippleButton onClick={useMyLocation}>Locate me</RippleButton>
               <LocationPicker
                 onSelect={(choice) => {
                   if (choice) {
@@ -294,16 +290,7 @@ function SellerForm({ user, providerStatus }) {
               />
             </div>
           </div>
-          <div className="pt-3">
-            <div
-              onClick={() => handleSubmit()}
-              className="text-lg cursor-pointer rounded-lg bg-black text-white w-full p-3 flex justify-center items-center"
-            >
-              Update
-            </div>
-            <div className="my-4 text-center text-green-700">{message}</div>
-          </div>
-          <div className="mb-15">
+          <div className="my-4">
             Note:-
             <br />
             To be eligibale to become a seller you have to fill all the details
@@ -311,6 +298,29 @@ function SellerForm({ user, providerStatus }) {
             seller.
             <br />
             Thank you
+          </div>
+          <div className="my-3 mb-10">
+            <div>
+              <RippleButton
+                onClick={() => setShowPopup(true)}
+                textColor="text-white"
+                className="w-full p-4 bg-blue-700 hover:bg-blue-600"
+              >
+                Submit
+              </RippleButton>
+              <PopUpMessage
+                title="Confirm"
+                content={
+                  message
+                    ? message
+                    : "Are you sure you want to submit your information?"
+                }
+                buttonContent="Submit"
+                open={showPopup}
+                onHandleUpdate={handleSubmit}
+                onClose={() => setShowPopup(false)}
+              />
+            </div>
           </div>
         </div>
       </div>

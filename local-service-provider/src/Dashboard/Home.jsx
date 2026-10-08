@@ -16,7 +16,6 @@ function Home({ user }) {
   const [locationLabel, setLocationLabel] = useState("");
   const [geoMessage, setGeoMessage] = useState("");
   const [locatingUser, setLocatingUser] = useState(false);
-
   const [showPopup, setShowPopup] = useState(false);
 
   const handleLogout = async () => {

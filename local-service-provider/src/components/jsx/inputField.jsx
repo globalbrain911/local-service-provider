@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { useState } from "react";
 
-function InputField({ label, id, type, input, className = "", ...props }) {
+function InputField({ label, id, type, input = "", ...props }) {
   const [click, setClick] = useState(false);
 
   return (
