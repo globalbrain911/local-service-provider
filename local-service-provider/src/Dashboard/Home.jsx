@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../assets/supabase-client";
-//import { data } from "react-router-dom";
+import InputField from "@/components/jsx/inputField";
 import LocationPicker from "./locationPicker";
+import { RippleButton } from "@/components/ui/ripple-button";
+import PopUpMessage from "@/components/jsx/PopUpMessage";
 
 function Home({ user }) {
   const [firsName, setFirstName] = useState("");
@@ -14,6 +16,8 @@ function Home({ user }) {
   const [locationLabel, setLocationLabel] = useState("");
   const [geoMessage, setGeoMessage] = useState("");
   const [locatingUser, setLocatingUser] = useState(false);
+
+  const [showPopup, setShowPopup] = useState(false);
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
@@ -101,7 +105,7 @@ function Home({ user }) {
 
   return (
     <>
-      <div className="max-w-200 pl-10 pt-10">
+      <div className="max-w-200 px-5 md:px-10 pt-10">
         <div className="text-3xl font-bold">
           Hello, {user.user_metadata.name}
         </div>
@@ -114,48 +118,48 @@ function Home({ user }) {
             />
           </div>
         </div>
-        <div className="pr-5">
-          <div className="">
-            <div className="text-lg">Name</div>
-            <div className="grid grid-cols-2">
-              <div className="pr-1 py-3">
-                <input
-                  value={firsName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                  className="border-none bg-slate-200 p-3 px-4 w-full rounded-lg selection:border-black selection:border-2"
-                  type="text"
-                  placeholder={firsName ? firsName : "First Name"}
-                />
-              </div>
-              <div className="pl-1 py-3">
-                <input
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                  className="border-none bg-slate-200 p-3 px-4 w-full rounded-lg selection:border-black selection:border-2"
-                  type="text"
-                  placeholder={lastName ? lastName : "Last Name"}
-                />
-              </div>
+        <div className=" mb-10">
+          <div className="grid grid-cols-2 gap-1 py-3">
+            <div className="">
+              <InputField
+                label="First Name"
+                id="firstName"
+                type="text"
+                value={firsName}
+                input={firsName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
             </div>
-          </div>
-          <div>
-            <div>Phone number</div>
-            <div className="py-3">
-              <input
-                value={mobile}
-                onChange={(e) => setMobile(e.target.value)}
-                className="border-none bg-slate-200 p-3 px-4 w-full rounded-lg selection:border-black selection:border-2"
-                type="number"
-                placeholder={mobile ? mobile : "Mobile number"}
+            <div className="">
+              <InputField
+                label="Last Name"
+                id="lastName"
+                type="text"
+                value={lastName}
+                input={lastName}
+                onChange={(e) => setLastName(e.target.value)}
               />
             </div>
           </div>
+          <div className="py-3">
+            <InputField
+              label="Mobile Number"
+              id="mobileNumber"
+              type="number"
+              value={mobile}
+              input={mobile}
+              onChange={(e) => setMobile(e.target.value)}
+            />
+          </div>
           <div className="">
-            <div className="pr-1 py-1">
-              <div className="border-none bg-slate-200 p-3 px-4 w-full rounded-lg selection:border-black selection:border-2">
-                {locationLabel ? locationLabel : "Select where you live..."}
-              </div>
-            </div>
+            <InputField
+              label="Location"
+              id="locationLabel"
+              value={locationLabel}
+              input={locationLabel}
+              onChange={(e) => setMobile(e.target.value)}
+              disabled
+            />
           </div>
           <div className="cursor-progress">
             {locatingUser ? (
@@ -168,48 +172,58 @@ function Home({ user }) {
               ""
             )}
           </div>
-          <div className="grid grid-cols-2 py-3 gap-2 w-full h-15">
-            <div
-              onClick={useMyLocation}
-              className="cursor-pointer rounded-2xl hover:bg-slate-300 bg-slate-200 w-full flex justify-center items-center"
-            >
-              Use my current location
-            </div>
-            <div className="cursor-pointer">
-              <LocationPicker
-                onSelect={(choice) => {
-                  if (choice) {
-                    setLatitude(choice.latitude);
-                    setLongitude(choice.longitude);
-                    setLocationLabel(choice.label);
-                    console.log(choice);
-                  } else {
-                    setLatitude(null);
-                    setLongitude(null);
-                    setLocationLabel("");
-                  }
-                }}
+          <div className="grid grid-cols-2 my-3 gap-2 items-stretch w-full h-15 ">
+            <RippleButton onClick={useMyLocation}>Locate me</RippleButton>
+            <LocationPicker
+              onSelect={(choice) => {
+                if (choice) {
+                  setLatitude(choice.latitude);
+                  setLongitude(choice.longitude);
+                  setLocationLabel(choice.label);
+                  console.log(choice);
+                } else {
+                  setLatitude(null);
+                  setLongitude(null);
+                  setLocationLabel("");
+                }
+              }}
+            />
+          </div>
+          <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste
+            suscipit esse fugiat corporis, ratione quia, magni vero veniam animi
+            laboriosam itaque sapiente saepe sequi soluta? Beatae quasi odio
+            sint eligendi?
+          </div>
+          <div className="mt-3 grid sm:grid-cols-2 gap-1">
+            <div>
+              <RippleButton
+                onClick={() => setShowPopup(true)}
+                textColor="text-white"
+                className="w-full p-4 bg-blue-700 hover:bg-blue-600"
+              >
+                Update
+              </RippleButton>
+              <PopUpMessage
+                title="Confirm"
+                content={
+                  message
+                    ? message
+                    : "Are you sure you want to change your information?"
+                }
+                buttonContent="Submit Changes"
+                open={showPopup}
+                onHandleUpdate={handleUpdate}
+                onClose={() => setShowPopup(false)}
               />
             </div>
-          </div>
-          <div className="pr-3 pt-5">
-            <div
-              onClick={handleUpdate}
-              className="text-lg cursor-pointer rounded-lg bg-black text-white w-full p-3 flex justify-center items-center"
-            >
-              Update
-            </div>
-            <div className="my-4 text-center text-green-700">
-              <p>{message}</p>
-            </div>
-          </div>
-          <div className="pr-3">
-            <div
+            <RippleButton
+              textColor="text-white"
+              className="w-full p-4 bg-red-700  hover:bg-red-600"
               onClick={handleLogout}
-              className="text-lg cursor-pointer rounded-lg bg-red-600 border-2 selection:border-black text-white w-full p-3 flex justify-center items-center"
             >
               Sign out
-            </div>
+            </RippleButton>
           </div>
         </div>
       </div>

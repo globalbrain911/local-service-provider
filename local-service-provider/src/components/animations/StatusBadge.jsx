@@ -141,7 +141,9 @@ export function StatusBadge({ status }) {
   const { Icon, label, style } = config[status] ?? config.approved;
   return (
     <span
-      className={` inline-flex items-center gap-2 rounded-full mt-3  sm:p-0 text-sm sm:text-lg font-medium ${style}`}
+      className={`
+        inline-flex items-center gap-2 rounded-full
+         sm:p-0 text-sm sm:text-lg font-medium ${style}`}
     >
       <Icon size={26} />
       {label}

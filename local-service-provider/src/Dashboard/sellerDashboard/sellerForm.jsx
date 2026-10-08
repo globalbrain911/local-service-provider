@@ -4,7 +4,6 @@ import Select from "react-select";
 import { supabase } from "../../assets/supabase-client";
 import LocationPicker from "../locationPicker";
 import clsx from "clsx";
-import { PulsatingButton } from "@/components/ui/pulsating-button";
 import { StatusBadge } from "@/components/animations/StatusBadge";
 
 function SellerForm({ user, providerStatus }) {
@@ -150,31 +149,40 @@ function SellerForm({ user, providerStatus }) {
     <>
       <HeaderLow />
       <div className="max-w-200 pl-5 pt-10 mt-5">
-        <div className="text-3xl font-bold flex flex-col sm:flex-row justify-between pr-5">
+        <div className="text-3xl font-bold flex flex-col sm:flex-row justify-between gap-3  items-center pr-5">
           Hello,{user.user_metadata.full_name}
           <StatusBadge status={providerStatus} />
         </div>
         <div className="pr-5 mt-5">
-          <div className="flex justify-between gap-1 my-5">
+          <div className="border my-5 relative flex rounded-4xl shadow-md bg-white p-1">
             <div
-              className="grid grid-cols-2 
-             border-2
-            text-lg rounded-4xl
-            "
+              className={clsx(
+                "absolute top-1 bottom-1 w-1/2 rounded-4xl bg-black transition-transform duration-300 ease-in-out",
+                providerType === "shop" ? "translate-x-full" : "translate-x-0",
+              )}
+            />
+
+            <button
+              type="button"
+              onClick={() => setProviderType("service")}
+              className={clsx(
+                "relative z-10 w-1/2 px-6 py-3 transition-colors duration-300 cursor-pointer",
+                providerType === "service" ? "text-white" : "text-black",
+              )}
             >
-              <div
-                className={`${providerType === "service" ? "px-6 py-3 rounded-4xl flex justify-center bg-black text-white" : "px-6 py-3 rounded-4xl flex justify-center"}`}
-                onClick={() => setProviderType("service")}
-              >
-                <label htmlFor="Service">Service</label>
-              </div>
-              <div
-                className={`${providerType === "shop" ? "px-6 py-3 rounded-4xl flex justify-center bg-black text-white" : "px-6 py-3 rounded-4xl flex justify-center"}`}
-                onClick={() => setProviderType("shop")}
-              >
-                <label htmlFor="Shop">Shop</label>
-              </div>
-            </div>
+              Service
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setProviderType("shop")}
+              className={clsx(
+                "relative z-10 w-1/2 px-6 py-3 transition-colors duration-300 cursor-pointer",
+                providerType === "shop" ? "text-white" : "text-black",
+              )}
+            >
+              Shop
+            </button>
           </div>
           {providerType === "service" ? (
             ""
@@ -184,7 +192,7 @@ function SellerForm({ user, providerStatus }) {
                 <div className="text-lg">Shop Name</div>
                 <div className="py-2">
                   <input
-                    className="border-none bg-slate-200 p-3 px-4 w-full rounded-lg selection:border-black selection:border-2"
+                    className="border-none bg-white p-3 px-4 w-full rounded-lg selection:border-black selection:border-2"
                     type="text"
                     placeholder="Ex:Keells"
                     value={businessName}
