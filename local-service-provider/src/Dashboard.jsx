@@ -54,24 +54,28 @@ function Dashboard() {
         <HeaderLow />
         <div className="sm:flex">
           <div className="sm:min-w-45 flex flex-col text-lg ">
-            <div className="h-20 sm:h-50 flex sm:flex-col  overflow-x-auto">
+            <div className="min-h-15 sm:h-50  text-sm sm:text-lg sm:flex grid grid-cols-4 w-full sm:flex-col">
               {items.map((item, index) => (
                 <div
                   onClick={() => {
                     setState(index);
                   }}
-                  className={clsx("cursor-pointer flex h-full sm:p-0 p-5", {
-                    "bg-purple-700 text-white": index === 3,
-                    "bg-zinc-200": state === index && index !== 3,
-                    "bg-purple-900": state === index && index === 3,
-                  })}
+                  className={clsx(
+                    "cursor-pointer relative flex justify-center sm:justify-normal items-center h-full",
+                    {
+                      " text-gray-600": index === 3,
+                      "bg-zinc-200": state === index && index !== 3,
+                      "": state === index && index === 3,
+                    },
+                  )}
                 >
                   <div
                     className={clsx({
-                      "sm:bg-black sm:w-1 sm:absolute sm:h-12": state === index,
+                      "sm:bg-black sm:w-1 absolute bottom-0 sm:h-full bg-black h-1 w-full":
+                        state === index,
                     })}
                   ></div>
-                  <div className="sm:ml-5 flex justify-center items-center">
+                  <div className="sm:ml-5 flex text-center items-center">
                     {item}
                   </div>
                 </div>

@@ -136,7 +136,7 @@ function ContactUsForm() {
                     </div>
                     <div className="hidden md:block">
                       <img
-                        src="https://mwalbvphsbxuohcdlzag.supabase.co/storage/v1/object/sign/for%20big%20images/Characters_demonstrating_teamwork.jpg?token=eyJraWQiOiI0NjZmMDhjOS1mNjMyLTRkOGEtOGZjNi04MTc3NTAyZTdkYTIiLCJhbGciOiJIUzUxMiJ9.eyJ1cmwiOiJmb3IgYmlnIGltYWdlcy9DaGFyYWN0ZXJzX2RlbW9uc3RyYXRpbmdfdGVhbXdvcmsuanBnIiwic2NvcGUiOiJkb3dubG9hZCIsImlhdCI6MTc5MTM1MTE0NiwiZXhwIjoxODIyODg3MTQ2fQ.Ym0DmI_LePQiGqMrkD3HaoN1_8BZxjG1EgAyPMkI5RfOesKD9Yga7ANEbJ74P9IiCXqf1w1iVySXdlbweZE-bA"
+                        src="https://ik.imagekit.io/psj7d33xh/LSF_Project/main_images/Characters_demonstrating_teamwork.jpg"
                         alt=""
                       />
                     </div>

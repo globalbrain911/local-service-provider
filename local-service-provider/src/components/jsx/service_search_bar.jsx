@@ -1,16 +1,22 @@
 import { useState } from "react";
 import magnifying_glass from "../../assets/images/magnifying_glass.png";
 import Location from "./location";
-import mainimage from "../../assets/images/main_page_image.jpg";
+import mainimage from "../../assets/images/main_page_image1.jpg";
 //import search from "../../assets/images/search.png";
 
 function ServicesBar() {
   const [inputValue, setInputVlaue] = useState("");
   const [hasBeenSelected, setHasBeenSelected] = useState(false);
+
+  // Landing page
+  //const navigate = useNavigate();
+  //const onSearch = (serviceName) =>
+  //navigate(`/services?service=${encodeURIComponent(serviceName)}`);
+
   return (
     <>
       <div className="flex justify-center ">
-        <div className="max-w-7xl w-full grid lg:grid-cols-2">
+        <div className="max-w-7xl w-full grid md:grid-cols-2">
           <div className="my-3 lg:pl-10 bg-ambe-500 flex justify-start items-center">
             <div className="">
               <div className="bg-amber-40 flex justify-between items-center px-5">
@@ -65,7 +71,7 @@ function ServicesBar() {
               </form>
             </div>
           </div>
-          <div className="flex justify-center hidden lg:block p-8">
+          <div className="flex justify-center hidden md:block md:pt-8 pr-8">
             <img className="object-contain" src={mainimage} alt="" />
           </div>
         </div>
